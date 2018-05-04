@@ -32,6 +32,7 @@ ReactDOM.render(
 	element,
 	document.querySelector('#root')
 );
+```
 
 #### Rendering Elements
 --- // 05/04/18
