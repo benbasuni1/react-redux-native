@@ -20,24 +20,79 @@ const user = {
 };
 
 // 3. JSX Elements
-const elem = <h1>{formatName(user)}</h1>
+const elem = <h1>{formatName(user)}</h1>;
 const elem = React.createElement(
 	'h1',
 	{ className : 'greeting' },
 	'Hello world!'
 );
 
-// 4. The ReactDOM renders onto the page, 1st param is variable, 2nd element is querySelector
-ReactDOM.render(
-	element,
-	document.querySelector('#root')
-);
+// 4. ReactDOM renders onto the page, 
+//      1st param is JSX element,
+//      2nd param is querySelector
+ReactDOM.render(element, document.querySelector('#root'));
 ```
 
 #### Rendering Elements
---- // 05/04/18
+---
+```js
+const element = <h1>hello</h1>
+ReactDOM.render(element, document.getElementById('root'));
+```
+
+React Elements are **immutable**. Once you create an element, you can't change its children or attributes.
+
+```js
+function tick() {
+  const element = <div>It is {new Date()}</div>
+  ReactDOM.render(element, document.getElementById('root'));
+}
+
+setInterval(tick, 1000);
+```
+
+Thinking about how the UI should look at any given moment rather than how to change it over time.
+
 #### Components and Props
---- // 05/05/18
+---
+Components let you split the UI into independent pieces and think about each piece in isolation.
+
+The simplest way to define a component is to write a JS function:
+```js
+// ES6 Class Component
+class Welcome extends React.Component {
+  render() {
+    return <h1>{props.name}</h1>;
+  }
+}
+
+// Rendering the Component
+const element = <Welcome name="Sara" />;
+ReactDOM.render(element, document.getElementById('root'));
+```
+
+```js
+// Functional / Stateless Component
+const Welcome = props => {
+  return <h1>{props.name}</h1>;
+}
+
+function App() {
+  return (
+    <div>
+      <Welcome name="Sara" />
+      <Welcome name="Rachel" />
+      <Welcome name="Edith" />
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+**All React Components must act like pure functions with respect to their props.**
+
+
 #### State and Lifecycle
 --- // 05/06/18
 #### Handling Events
